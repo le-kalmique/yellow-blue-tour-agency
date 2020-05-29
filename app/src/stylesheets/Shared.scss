@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+$color-white: rgb(255, 252, 242);
+$color-grey: rgb(54, 53, 55);
+$color-yellow: rgb(252, 243, 0);
+$color-blue: rgb(83, 76, 185);
+$color-lightgrey: rgb(204, 197, 185);
+
+html, body {
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  text-decoration: none;
+}

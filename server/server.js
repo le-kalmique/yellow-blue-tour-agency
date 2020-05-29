@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const express = require('express');
-var cors = require('cors');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+
+
 const Tour = require('./controllers/tour');
 
 const API_PORT = 4000;
@@ -49,6 +51,32 @@ router.get('/tours', (req,res)=> {
             res.status(500).send({});
         })
 })
+
+router.post('/', (req, res, next) => {
+    if (!req.body) return res.sendStatus(400);
+    const newUser = {
+        profile: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            login: req.body.email
+        },
+        credentials: {
+            password: {
+                value: req.body.password
+            }
+        }
+    };
+    oktaClient.createUser(newUser)
+        .then(user => {
+            res.status(201);
+            res.send(user);
+        })
+        .catch(err => {
+            res.status(400);
+            res.send(err);
+        })
+});
 
 
 // launch our backend into a port
