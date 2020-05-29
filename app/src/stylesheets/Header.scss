@@ -1,0 +1,213 @@
+@import "Shared";
+
+.logo {
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: $color-white;
+  background: $color-grey;
+  text-align: center;
+  padding: 0.5rem;
+}
+.yellow {
+  color: $color-yellow;
+}
+.blue {
+  color: $color-blue;
+}
+
+.menu {
+  font-family: 'Raleway', sans-serif;
+  background: $color-grey;
+  height: 4rem;
+
+  .menu__list{
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  > .menu__list{
+    max-width: 1000px;
+    padding: 0 2rem;
+    display: flex;
+
+    > .menu__item {
+      flex: 1;
+      padding: 0.75rem 0;
+
+      &:after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        bottom: 5px;
+        left: calc(50% - 2px);
+        background: $color-yellow;
+        will-change: transform;
+        transform: scale(0);
+        transition: transform 0.2s ease;
+      }
+
+      &:hover:after {
+        transform: scale(1);
+      }
+    }
+  }
+}
+
+.menu__item {
+  position: relative;
+  line-height: 2.5rem;
+  text-align: center;
+
+  a {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: block;
+    color: $color-white;
+  }
+
+  &:hover {
+   > .sub-menu {
+     display: block;
+   }
+  }
+}
+
+.sub-menu {
+  list-style: none;
+  padding: 0;
+
+  position: absolute;
+  width: 100%;
+  top: 100%;
+  left: 0;
+  display: none;
+  z-index: 1;
+
+  .menu__item {
+    padding: 0.75rem 0;
+    background: $color-blue;
+    opacity: 0;
+    transform-origin: bottom;
+    animation: enter 0.2s ease forwards;
+
+    a {
+      padding: 0 0.75rem;
+    }
+
+    &:hover {
+      background: $color-yellow;
+      > a {
+        color: $color-grey;
+      }
+    }
+
+    /* Animation for submenu children */
+    @for $n from 1 through 3 {
+      &:nth-child(#{$n}) {
+        animation-duration: 0.2s + 0.1s * ($n - 1);
+        animation-delay: 0.1s * ($n - 1)
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  .sub-menu .menu__item {
+    background: $color-blue;
+  }
+
+  .menu {
+    position: relative;
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: calc(50% - 2px);
+      right: 1rem;
+      width: 30px;
+      height: 4px;
+      background: $color-white;
+      box-shadow: 0 10px $color-white, 0 -10px $color-white;
+    }
+    &:hover {
+      > .menu__list{
+        display: flex;
+      }
+      &:after {
+        box-shadow: none;
+      }
+    }
+
+    > .menu__list {
+      display: none;
+      background: $color-grey;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+      animation: fade 0.2s ease-out;
+
+      >.menu__item {
+        flex: 0;
+        opacity: 0;
+        animation: enter 0.3s ease-out forwards;
+
+        @for $n from 1 through 5 {
+          &:nth-child(#{$n}) {
+            animation-delay: 0.1s * ($n - 1);
+          }
+        }
+        &:after {
+          left: auto;
+          right: 1rem;
+          bottom: calc(50% - 2px);
+        }
+        &:hover {
+          z-index: 1;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .sub-menu {
+    width: 100vw;
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+*:before, *:after {
+  box-sizing: inherit;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: scaleY(0.98) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
