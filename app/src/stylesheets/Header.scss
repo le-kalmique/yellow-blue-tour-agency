@@ -1,6 +1,12 @@
 @import "Shared";
 
+$logo-height: 3rem;
+
 .logo {
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  width: 100%;
   font-family: 'Raleway', sans-serif;
   font-size: 2rem;
   font-weight: bold;
@@ -8,6 +14,7 @@
   background: $color-grey;
   text-align: center;
   padding: 0.5rem;
+  height: $logo-height;
 }
 .yellow {
   color: $color-yellow;
@@ -17,6 +24,10 @@
 }
 
 .menu {
+  position: fixed;
+  top: $logo-height;
+  z-index: 3;
+  width: 100%;
   font-family: 'Raleway', sans-serif;
   background: $color-grey;
   height: 4rem;
@@ -118,12 +129,17 @@
 
 
 @media screen and (max-width: 600px) {
+  .logo {
+    height: $logo-height;
+  }
   .sub-menu .menu__item {
     background: $color-blue;
   }
 
   .menu {
-    position: relative;
+    position: fixed;
+    top: $logo-height;
+    width: 100%;
     z-index: 10;
 
     &:after {

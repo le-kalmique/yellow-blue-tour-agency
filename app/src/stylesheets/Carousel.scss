@@ -22,6 +22,11 @@
   font-family: 'Raleway', sans-serif;
 }
 
+.carousel {
+  margin-top: 6rem;
+  position: relative;
+}
+
 .slide {
   &__title {
     font-family: 'Raleway', sans-serif;
@@ -30,7 +35,7 @@
     position: absolute;
     z-index: 1;
     right: 25%;
-    top: 30%;
+    top: 35%;
     text-align: center;
     width: 50%;
     color: $color-white;
@@ -53,7 +58,7 @@
 .left-icon {
   position: absolute;
   z-index: 1;
-  top: 35%;
+  top: 45%;
   left: 2%;
   &:hover {
     transform: scale(1.2);
@@ -63,7 +68,7 @@
 .right-icon {
   position: absolute;
   z-index: 1;
-  top: 35%;
+  top: 48%;
   right: 2%;
   &:hover {
     transform: scale(1.2);
@@ -82,7 +87,10 @@
   .slide__image {
     height: 30vh;
   }
-  .left-icon, .right-icon {
-    top: 30%;
+  .left-icon {
+    top: 35%;
+  }
+  .right-icon {
+    top: 35.5%;
   }
 }

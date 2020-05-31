@@ -4,13 +4,6 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
 import '../../stylesheets/Carousel.css'
 
-const sliderContent = [
-  {title: 'Tour 1', img: 'https://cdn.pixabay.com/photo/2017/01/01/20/30/kiev-1945487_1280.jpg'},
-  {title: 'Tour 2', img: 'https://cdn.pixabay.com/photo/2014/04/26/12/11/ukraine-332449_1280.jpg'},
-  {title: 'Tour 3', img: 'https://cdn.pixabay.com/photo/2017/08/10/17/35/grave-2625396_1280.jpg'}
-]
-
-
 class LeftArrow extends Component{
   constructor(props) {
     super(props);
@@ -18,7 +11,7 @@ class LeftArrow extends Component{
   render() {
     return(
       <div className='backArrow' onClick={this.props.goToPrevSlide}>
-        <FontAwesomeIcon icon={faAngleLeft} className='left-icon' size="2x"/>
+        <FontAwesomeIcon icon={faAngleLeft} className='left-icon' size="3x"/>
       </div>
     )
   }
@@ -31,7 +24,7 @@ class RightArrow extends Component{
   render() {
     return(
       <div className='nextArrow' onClick={this.props.goToNextSlide}>
-        <FontAwesomeIcon icon={faAngleRight} className='right-icon' size="2x"/>
+        <FontAwesomeIcon icon={faAngleRight} className='right-icon' size="3x"/>
       </div>
     )
   }
