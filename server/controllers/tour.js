@@ -12,6 +12,10 @@ class Tour {
     static getAll() {
         return Tours.find({});
     }
+
+    static getSome(number) {
+        return Tours.find({}).limit(number);
+    }
 }
 
 module.exports = Tour;

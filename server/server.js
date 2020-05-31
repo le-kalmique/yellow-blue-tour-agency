@@ -30,6 +30,18 @@ app.use(logger('dev'));
 app.use('/api', router);
 
 
+router.get('/tours/carousel', (req, res) => {
+    let carouselLen = 3;
+    if (req.query.len) carouselLen = parseInt(req.query.len);
+    Tour.getSome(carouselLen)
+      .then(tours => {
+          res.status(200).send({
+            tours: tours
+          })
+      })
+      .catch(err => res.status(500).send("Error 500"))
+})
+
 router.get('/tours', (req,res)=> {
     let page = 0;
     if (req.query.page) page = parseInt(req.query.page) - 1;

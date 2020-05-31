@@ -1,0 +1,88 @@
+@import "Shared";
+
+@mixin non-select {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+}
+
+.active {
+  display: block;
+}
+.inactive {
+  display: none;
+}
+.loader {
+  position: absolute;
+  right: 42%;
+  top: 30%;
+  font-size: 2rem;
+  font-weight: bold;
+  font-family: 'Raleway', sans-serif;
+}
+
+.slide {
+  &__title {
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 2rem;
+    position: absolute;
+    z-index: 1;
+    right: 25%;
+    top: 30%;
+    text-align: center;
+    width: 50%;
+    color: $color-white;
+    background: rgba(0, 0, 0, 0.6);
+    -webkit-box-shadow: 20px 20px 38px -5px rgba(0,0,0,0.8);
+    -moz-box-shadow: 20px 20px 38px -5px rgba(0,0,0,0.8);
+    box-shadow: 20px 20px 38px -5px rgba(0,0,0,0.8);
+
+    @include non-select;
+  }
+  &__image {
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+    opacity: 70%;
+  }
+
+}
+
+.left-icon {
+  position: absolute;
+  z-index: 1;
+  top: 35%;
+  left: 2%;
+  &:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+}
+.right-icon {
+  position: absolute;
+  z-index: 1;
+  top: 35%;
+  right: 2%;
+  &:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .slide__title {
+    font-size: 1.5rem;
+    top: 25%;
+    right: 25%;
+    text-align: center;
+    width: 50%;
+  }
+  .slide__image {
+    height: 30vh;
+  }
+  .left-icon, .right-icon {
+    top: 30%;
+  }
+}
