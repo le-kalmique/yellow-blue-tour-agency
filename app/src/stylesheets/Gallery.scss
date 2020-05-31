@@ -9,6 +9,8 @@ $image-side: 300px;
   align-items: center;
   justify-content: center;
 
+  padding: 0 2rem 2rem;
+
   &__image {
     height: $image-side;
     width: $image-side;
@@ -68,6 +70,7 @@ $image-side: 300px;
       height: $image-side;
       width: $image-side;
     }
+    margin-bottom: 2rem;
   }
 }
 

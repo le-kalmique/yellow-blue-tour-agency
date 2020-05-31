@@ -17,7 +17,9 @@ export default class Section extends Component{
     if (this.props.background) className += " background_grey"
     return (
       <div className={className}>
-        <SectionTitle text={this.props.title}/>
+        {this.props.title !== undefined &&
+          <SectionTitle text={this.props.title}/>
+        }
         {this.props.section}
       </div>
     );

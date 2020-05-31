@@ -6,6 +6,12 @@ $color-yellow: rgb(252, 243, 0);
 $color-blue: rgb(83, 76, 185);
 $color-lightgrey: rgb(204, 197, 185);
 
+@mixin border-shadow {
+  -webkit-box-shadow: 0 0 15px -3px rgba(0,0,0,0.59);
+  -moz-box-shadow: 0 0 15px -3px rgba(0,0,0,0.59);
+  box-shadow: 0 0 15px -3px rgba(0,0,0,0.59);
+}
+
 html, body {
   margin: 0;
   font-family: 'Open Sans', sans-serif;
@@ -15,8 +21,16 @@ a {
   text-decoration: none;
 }
 
-@mixin border-shadow {
-  -webkit-box-shadow: 0 0 15px -3px rgba(0,0,0,0.59);
-  -moz-box-shadow: 0 0 15px -3px rgba(0,0,0,0.59);
-  box-shadow: 0 0 15px -3px rgba(0,0,0,0.59);
+.button {
+  border: 0;
+  border-radius: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  @include border-shadow;
 }
+

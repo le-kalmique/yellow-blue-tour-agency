@@ -5,6 +5,7 @@ import CardsSection from "./CardsSection";
 import Section from "./Section";
 import TestimonialSection from "./TestimonialSection";
 import GallerySection from "./GallerySection";
+import OrderSection from "./OrderSection";
 
 class Home extends Component {
   render() {
@@ -15,6 +16,7 @@ class Home extends Component {
         <Section title="What we do?" section={<CardsSection/>}/>
         <Section title="Testimonials" section={<TestimonialSection/>} background={true}/>
         <Section title="Gallery" section={<GallerySection/>}/>
+        <Section section={<OrderSection/>}/>
       </div>
     );
   }

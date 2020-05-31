@@ -1,0 +1,17 @@
+@import "Shared";
+
+.order {
+  background: url("https://cdn.pixabay.com/photo/2015/07/30/18/05/sunflower-868119_1280.jpg");
+  height: 70vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px){
+  .order {
+    height: 40vh;
+    background: url("https://cdn.pixabay.com/photo/2015/07/30/18/05/sunflower-868119_1280.jpg") 30% 50%;
+  }
+}
