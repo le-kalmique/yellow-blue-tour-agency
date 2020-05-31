@@ -1,1 +1,83 @@
 @import "Shared";
+
+$image-side: 300px;
+
+.gallery {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+
+  &__image {
+    height: $image-side;
+    width: $image-side;
+    object-fit: cover;
+    margin: 0.2rem;
+    transition: all .2s ease-in-out;
+  }
+  &__item {
+    position: relative;
+    &:hover {
+      & > .gallery__text {
+        visibility: visible;
+        transform: scale(0.9);
+        opacity: 1;
+      }
+      & > .gallery__image {
+        transform: scale(0.9);
+      }
+    }
+  }
+  &__text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+
+    width: $image-side;
+    height: $image-side;
+    margin: 0.2rem;
+    padding: 0.2rem;
+
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    font-family: 'Raleway', sans-serif;
+    font-weight: bold;
+    font-size: 1.5rem;
+
+    transition: all .2s ease-in-out;
+    opacity: 0;
+  }
+}
+
+
+@media screen and (max-width: 600px) {
+  $image-side: 200px;
+
+  .gallery {
+    &__image {
+      height: $image-side;
+      width: $image-side;
+    }
+    &__text {
+      height: $image-side;
+      width: $image-side;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .gallery {
+    &__image {
+      width: 95%;
+    }
+    &__text {
+      width: 95%;
+    }
+  }
+}

@@ -29,6 +29,17 @@ app.use(logger('dev'));
 
 app.use('/api', router);
 
+router.get('/tours/gallery', (req,res) => {
+  let gallerySize = 6;
+  if (req.query.len) gallerySize = parseInt(req.query.len);
+  Tour.getSome(gallerySize)
+    .then(tours => {
+      res.status(200).send({
+        tours: tours
+      })
+    })
+    .catch(err => res.status(500).send("Error 500"));
+})
 
 router.get('/tours/carousel', (req, res) => {
     let carouselLen = 3;
