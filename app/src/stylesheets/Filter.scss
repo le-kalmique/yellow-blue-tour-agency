@@ -4,7 +4,7 @@
   margin-top: 8rem;
 }
 
-.filter {
+.side-menu {
   position: fixed;
   overflow: auto;
   display: flex;
@@ -19,7 +19,17 @@
   min-width: 20%;
   z-index: 3;
 
+
   @include border-shadow;
+}
+
+.filter__button {
+  display: none;
+  border: none;
+  background-color: $color-yellow;
+  width: 20vw;
+  height: 5vh;
+  font-size: 1rem;
 }
 
 .checkbox-block {
@@ -115,5 +125,91 @@
     font-family: "Raleway", sans-serif;
     font-size: 1.5rem;
     margin: 1rem 0;
+  }
+}
+
+
+.pagination {
+  position: fixed;
+  float: left;
+  top: 11.5rem;
+  left: 5rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &__arrow-btn {
+    border: none;
+    background-color: $color-yellow;
+    font-size: 1.5rem;
+    margin: 0 0.5rem 0 0.5rem;
+
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+    }
+    &:disabled {
+      background-color: $color-lightgrey;
+      &:hover {
+        cursor: default;
+        transform: none;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 920px){
+  .filter {
+    &__button {
+      display: block;
+      position: fixed;
+      top: 30vh;
+      z-index: 2;
+
+      &:hover ~ .side-menu, &:active ~ .side-menu{
+        //visibility: visible;
+        //-webkit-transform: translate(-500px, 500px);
+        //-moz-transform: translate(500px, 0px);
+        //-ms-transform: translate(500px, 0px);
+        //-o-transform: translate(500px, 0px);
+        transform: translate(500px, 0);
+      }
+      @include border-shadow;
+    }
+  }
+  .side-menu {
+    transition: all ease 0.5s;
+    transition-delay: 0.1s;
+    //visibility: hidden;
+    left: -500px;
+    background-color: white;
+    &:hover, &:active {
+      //display: block;
+      //visibility: visible;
+      left: 0;
+      & ~ .filter__button {
+        display: none;
+      }
+    }
+  }
+
+  .pagination {
+    margin: auto;
+    left: 0;
+    top: 25vh;
+    z-index: 2;
+    background-color: white;
+    @include border-shadow;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .pagination {
+    top: 30vh;
+  }
+  .filter__button {
+    top: 35vh;
   }
 }

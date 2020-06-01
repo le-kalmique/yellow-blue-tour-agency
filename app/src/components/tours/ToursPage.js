@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMapMarkerAlt, faCalendarAlt, faClock} from "@fortawesome/free-solid-svg-icons";
+import {faMapMarkerAlt, faCalendarAlt, faClock, faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
 
 
 import Header from "../shared/Header";
 import "../../stylesheets/Tours.css";
 import Section from "../home/Section";
-import FilterMenu from "./ToursFilter";
+import {FilterMenu, Pagination} from "./ToursFilter";
 
 function toursQuery(pageN, perPage, searchQ, city, minDate, maxDate) {
   return new Promise((resolve, reject) => {
@@ -64,27 +64,50 @@ class TourCard extends Component {
   }
 }
 
+
 class ToursList extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: true,
-      toursInfo: {}
+      toursInfo: {},
+      queryData: {
+        searchQuery: "",
+        city: [],
+        minDate: "",
+        maxDate: ""
+      }
     };
     this.filterCallback = this.filterCallback.bind(this);
+    this.paginationCallback = this.paginationCallback.bind(this);
   }
 
   filterCallback(data) {
+    this.setState({loading: true})
     toursQuery(1, 6, data.searchQuery, data.city, data.minDate, data.maxDate)
       .then(tours => {
         if (tours.status === 500) throw new Error("Error 500");
         else {
-          this.setState({loading: false, toursInfo: tours});
+          this.setState({loading: false, toursInfo: tours, queryData:
+              {searchQuery: data.searchQuery, city: data.city, minDate: data.minDate, maxDate: data.maxDate}
+          });
         }
       })
       .catch(err => console.log(err));
   }
-
+  paginationCallback(data) {
+    this.setState({loading: true});
+    toursQuery(data, 6, this.state.queryData.searchQuery, this.state.queryData.city,
+      this.state.queryData.minDate, this.state.queryData.maxDate)
+      .then(tours => {
+        if (tours.status === 500) throw new Error("Error 500");
+        else {
+          this.setState({loading: false, toursInfo: tours
+          });
+        }
+      })
+      .catch(err => console.log(err));
+  }
   componentDidMount() {
     this.setState({loading: true});
     toursQuery(1, 6, "", [], "", "")
@@ -99,13 +122,16 @@ class ToursList extends Component {
   render() {
     console.log(this.state.toursInfo)
     return(
-      <div className={"section__content tours"}>
+      <div className={"section__content tours-section"}>
+        <Pagination parentCallback={this.paginationCallback} pagesNum={this.state.toursInfo.pagesNum}/>
         <FilterMenu parentCallback={this.filterCallback}/>
+        <div className="tours">
         {this.state.loading ? 'Loading...' :  this.state.toursInfo.tours.map((tour, i) =>
           <Link to={`/tours/${tour._id}`} key={i}>
             <TourCard tour={tour}/>
           </Link>
         )}
+        </div>
       </div>
     )
   }

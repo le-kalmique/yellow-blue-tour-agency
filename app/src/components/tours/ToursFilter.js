@@ -1,5 +1,46 @@
 import React, {Component} from "react";
 import "../../stylesheets/Filter.css";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
+
+
+export class Pagination extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      chosenPage: 1
+    }
+    this.handleLeftClick = this.handleLeftClick.bind(this);
+    this.handleRightClick = this.handleRightClick.bind(this);
+    this.sendPage = this.sendPage.bind(this);
+  }
+  sendPage() {
+    console.log('PAG', this.state);
+    this.props.parentCallback(this.state.chosenPage);
+  }
+  handleRightClick(event) {
+    if (this.state.chosenPage !== this.props.pagesNum)
+      this.setState({chosenPage: ++this.state.chosenPage}, this.sendPage)
+  }
+  handleLeftClick(event) {
+    if (this.state.chosenPage !== 1)
+      this.setState({chosenPage: --this.state.chosenPage}, this.sendPage)
+  }
+  render() {
+    return (
+      <div className="pagination">
+
+        <button className="pagination__arrow-btn" disabled={this.state.chosenPage === 1} onClick={this.handleLeftClick}>
+          <FontAwesomeIcon icon={faAngleLeft}/>
+        </button>
+        <span>{this.state.chosenPage}</span>/<span>{this.props.pagesNum != undefined ? this.props.pagesNum : '...'}</span>
+        <button className="pagination__arrow-btn" disabled={this.state.chosenPage === this.props.pagesNum} onClick={this.handleRightClick}>
+          <FontAwesomeIcon icon={faAngleRight}/>
+        </button>
+      </div>
+    )
+  }
+}
 
 class SearchBox extends Component {
   constructor(props) {
@@ -124,7 +165,7 @@ class SideMenuBlock extends Component {
   }
 }
 
-export default class FilterMenu extends Component {
+export class FilterMenu extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -154,8 +195,11 @@ export default class FilterMenu extends Component {
   render() {
     return (
       <div className="filter">
-        <SideMenuBlock title="Search" block={<SearchBox parentCallback={this.searchCallback}/>}/>
-        <SideMenuBlock title="Cities" block={<CheckboxBlock searchQ={this.state.searchQuery} parentCallback={this.cityCallback}/>}/>
+        <button className="filter__button">Search</button>
+        <div className="side-menu">
+          <SideMenuBlock title="Search" block={<SearchBox parentCallback={this.searchCallback}/>}/>
+          <SideMenuBlock title="Cities" block={<CheckboxBlock searchQ={this.state.searchQuery} parentCallback={this.cityCallback}/>}/>
+        </div>
       </div>
     );
   }
