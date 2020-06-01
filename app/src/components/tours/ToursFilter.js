@@ -52,7 +52,6 @@ class CheckboxBlock extends Component {
   onChange(event) {
     const cities = this.state.chosenCities;
     const all = this.state.citiesAll;
-    console.log("ALL", all)
     if (event.target.checked) {
       all[all.findIndex(city => city.city === event.target.value)].chosen = true;
       cities.push(event.target.value);

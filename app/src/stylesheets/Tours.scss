@@ -1,1 +1,81 @@
 @import "Shared";
+
+.tours {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-left: 25%;
+  width: 70%;
+}
+
+.tours a {
+  color: black;
+  margin: 0;
+  padding: 0;
+  max-width: 40%;
+  min-width: 20%;
+}
+
+.tour {
+  max-width: 100%;
+  min-width: 60%;
+  max-height: 350px;
+
+  color: black;
+
+  margin: 1rem;
+
+  transition: all ease 0.5s;
+
+  @include border-shadow;
+  border-radius: 0 0 10px 10px;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &__image {
+    height: 10rem;
+    width: 100%;
+    object-fit: cover;
+  }
+  &__content {
+    padding: 1rem;
+  }
+  &__title {
+    font-family: 'Raleway', sans-serif;
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+  &__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  &__time-place {
+    min-width: 30%;
+  }
+  &__description {
+    width: 60%;
+    min-width: 50%;
+    text-align: right;
+    margin: 0;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    line-height: 1.5rem;
+    max-height: 4 * 1.5rem;
+  }
+  &__date, &__time, &__place {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  &__icon {
+    color: $color-yellow;
+    margin: 0.4rem;
+  }
+}
