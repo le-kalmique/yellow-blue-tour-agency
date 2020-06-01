@@ -59,47 +59,29 @@ router.get('/tours', (req,res)=> {
     let toursPerPage = 5;
     if (req.query.limit) toursPerPage = req.query.limit;
     let searchQuery = "";
-    //if (req.query.search) searchQuery = req.query.search;
+    if (req.query.search) searchQuery = req.query.search;
+    let city = "";
+    if (req.query.city) city = req.query.city;
+    let minDate = new Date().toISOString();
+    if (req.query.minDate) minDate = new Date(req.query.minDate);
+    let maxDate = new Date();
+    maxDate.setFullYear(minDate.getFullYear() + 1);
+    if (req.query.maxDate) maxDate = new Date(req.query.maxDate);
     if (page < 0) res.status(400).send('Bad request');
-    else Tour.getAll()
+    else Tour.getPage(page, toursPerPage, searchQuery, city, minDate, maxDate)
         .then(tours => {
-            const pagesNum = Math.ceil(tours.toursNum / toursPerPage);
+            const pagesNum = Math.ceil(tours.toursLength / toursPerPage);
             res.status(200).send({
-                tours: tours,
+                tours: tours.toursOnPage,
                 page: page+1,
                 pagesNum: pagesNum
             })
         })
         .catch(err => {
-            res.status(500).send({});
+            res.status(500).send(err);
         })
 })
 
-router.post('/', (req, res, next) => {
-    if (!req.body) return res.sendStatus(400);
-    const newUser = {
-        profile: {
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            login: req.body.email
-        },
-        credentials: {
-            password: {
-                value: req.body.password
-            }
-        }
-    };
-    oktaClient.createUser(newUser)
-        .then(user => {
-            res.status(201);
-            res.send(user);
-        })
-        .catch(err => {
-            res.status(400);
-            res.send(err);
-        })
-});
 
 
 // launch our backend into a port

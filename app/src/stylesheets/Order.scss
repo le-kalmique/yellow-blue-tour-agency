@@ -3,15 +3,53 @@
 .order {
   background: url("https://cdn.pixabay.com/photo/2015/07/30/18/05/sunflower-868119_1280.jpg");
   height: 70vh;
+  width: 100%;
 
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@media screen and (max-width: 600px){
+.button {
+  border: 0;
+  border-radius: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 2rem;
+  background-color: $color-yellow;
+  width: 40vw;
+  height: 8vh;
+  &:hover {
+    cursor: pointer;
+  }
+
+  @include border-shadow;
+}
+
+@media screen and (max-width: 800px){
   .order {
     height: 40vh;
     background: url("https://cdn.pixabay.com/photo/2015/07/30/18/05/sunflower-868119_1280.jpg") 30% 50%;
+  }
+
+  .button {
+    width: 35vw;
+    height: 6vh;
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 600px){
+  .button {
+    width: 35vw;
+    height: 8vh;
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .button {
+    width: 50vw;
+    height: 8vh;
+    font-size: 1.5rem;
   }
 }

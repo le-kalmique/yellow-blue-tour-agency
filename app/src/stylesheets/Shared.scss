@@ -21,16 +21,3 @@ a {
   text-decoration: none;
 }
 
-.button {
-  border: 0;
-  border-radius: 20px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 1rem;
-
-  &:hover {
-    cursor: pointer;
-  }
-
-  @include border-shadow;
-}
-
