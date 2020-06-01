@@ -61,6 +61,15 @@ router.get('/tours/cities', (req, res) => {
     .catch(err => res.status(500).send(err));
 });
 
+router.get('/tours/:id', (req, res) => {
+  const id = req.params.id;
+  Tour.getById(id)
+    .then(tour => {
+      if (tour.name === undefined) res.status(404).send({});
+      else res.status(200).send(tour);
+    })
+    .catch(err => res.status(500).send(err));
+})
 
 router.get('/tours', (req,res)=> {
     let page = 0;

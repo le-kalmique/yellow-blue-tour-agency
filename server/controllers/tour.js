@@ -12,6 +12,10 @@ class Tour {
         this.placesLeft = placesAll;
     }
 
+    static getById(id) {
+        return Tours.findOne({_id: id});
+    }
+
     static getAll() {
         return Tours.find({});
     }

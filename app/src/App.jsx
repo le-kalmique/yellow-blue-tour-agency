@@ -5,18 +5,10 @@ import {
   Route,
 } from "react-router-dom";
 
-
-// import io from 'socket.io-client';
-// import OAuth from './OAuth';
-// import { API_URL } from './config';
-
 import './components/home/Home';
 import Home from "./components/home/Home";
 import ToursPage from "./components/tours/ToursPage";
-
-// const socket = io(API_URL);
-// const providers = ['google', 'github'];
-
+import TourPage from "./components/tours/TourPage";
 
 class App extends Component {
   render() {
@@ -24,6 +16,7 @@ class App extends Component {
       <Router>
           <Switch>
             <Route exact path="/"><Home/></Route>
+            <Route path='/tours/:id' component={TourPage}/>
             <Route path="/tours"><ToursPage/></Route>
           </Switch>
       </Router>

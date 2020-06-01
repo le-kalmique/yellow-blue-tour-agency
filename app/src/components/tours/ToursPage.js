@@ -29,6 +29,25 @@ function toursQuery(pageN, perPage, searchQ, city, minDate, maxDate) {
   });
 }
 
+export function TimePlace(props) {
+  return (
+    <div className={`${props.className}__time-place`}>
+      <div className={`${props.className}__place`}>
+        <FontAwesomeIcon icon={faMapMarkerAlt} size="1x" className={`${props.className}__icon`}/>
+        {props.city}
+      </div>
+      <div className={`${props.className}__date`}>
+        <FontAwesomeIcon icon={faCalendarAlt} size="1x" className={`${props.className}__icon`}/>
+        <span>{(new Date(props.date)).toLocaleDateString()}</span>
+      </div>
+      <div className={`${props.className}__time`}>
+        <FontAwesomeIcon icon={faClock} size="1x" className={`${props.className}__icon`}/>
+        <span>{(new Date(props.date)).toLocaleTimeString().slice(0, 5)}</span>
+      </div>
+    </div>
+  )
+}
+
 class TourCard extends Component {
   render() {
     return (
@@ -37,20 +56,7 @@ class TourCard extends Component {
         <div className="tour__content">
           <h3 className="tour__title">{this.props.tour.name}</h3>
           <div className="tour__info">
-            <div className="tour__time-place">
-              <div className="tour__place">
-                <FontAwesomeIcon icon={faMapMarkerAlt} size="1x" className="tour__icon"/>
-                {this.props.tour.city}
-              </div>
-              <div className="tour__date">
-                <FontAwesomeIcon icon={faCalendarAlt} size="1x" className="tour__icon"/>
-                <span>{(new Date(this.props.tour.date)).toLocaleDateString()}</span>
-              </div>
-              <div className="tour__time">
-                <FontAwesomeIcon icon={faClock} size="1x" className="tour__icon"/>
-                <span>{(new Date(this.props.tour.date)).toLocaleTimeString().slice(0, 5)}</span>
-              </div>
-            </div>
+            <TimePlace city={this.props.tour.city} date={this.props.tour.date} className={"tour"}/>
             <p className="tour__description">
               {this.props.tour.description}
             </p>
