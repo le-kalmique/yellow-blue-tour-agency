@@ -15,7 +15,6 @@ export class Pagination extends Component {
     this.sendPage = this.sendPage.bind(this);
   }
   sendPage() {
-    console.log('PAG', this.state);
     this.props.parentCallback(this.state.chosenPage);
   }
   handleRightClick(event) {
@@ -26,10 +25,16 @@ export class Pagination extends Component {
     if (this.state.chosenPage !== 1)
       this.setState({chosenPage: --this.state.chosenPage}, this.sendPage)
   }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (prevProps.pagesNum !== this.props.pagesNum)
+    {
+      this.setState({chosenPage: 1})
+    }
+  }
+
   render() {
     return (
       <div className="pagination">
-
         <button className="pagination__arrow-btn" disabled={this.state.chosenPage === 1} onClick={this.handleLeftClick}>
           <FontAwesomeIcon icon={faAngleLeft}/>
         </button>

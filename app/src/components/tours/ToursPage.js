@@ -16,9 +16,6 @@ function toursQuery(pageN, perPage, searchQ, city, minDate, maxDate) {
     city.forEach(city => {
       citiesQ += `city[]=${city}&`;
     })
-    let q = `page=${pageN}&limit=${perPage}&search=${searchQ}` +
-      `&${citiesQ}minDate=${minDate}&maxDate=${maxDate}`
-    console.log(q)
     fetch(`http://localhost:4000/api/tours?page=${pageN}&limit=${perPage}&search=${searchQ}` +
               `&${citiesQ}minDate=${minDate}&maxDate=${maxDate}`)
       .then(res => {
@@ -120,7 +117,6 @@ class ToursList extends Component {
       .catch(err => console.log(err));
   }
   render() {
-    console.log(this.state.toursInfo)
     return(
       <div className={"section__content tours-section"}>
         <Pagination parentCallback={this.paginationCallback} pagesNum={this.state.toursInfo.pagesNum}/>
