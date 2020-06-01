@@ -1,0 +1,119 @@
+@import "Shared";
+
+.content {
+  margin-top: 8rem;
+}
+
+.filter {
+  position: fixed;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem 2rem 0;
+  border-radius: 0 25px;
+
+
+  left: 0;
+  height: 90%;
+  min-width: 20%;
+  z-index: 3;
+
+  @include border-shadow;
+}
+
+.checkbox-block {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    //
+    //padding-left: 2em;
+    //margin-bottom: 1em;
+    font-size: 1rem;
+
+    &:hover > .checkbox-block__checkmark{
+      background-color: $color-lightgrey;
+    }
+  }
+  &__input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked {
+      & ~ .checkbox-block__checkmark {
+        background-color: $color-yellow;
+      }
+      & ~ .checkbox-block__checkmark:after {
+        display: block;
+      }
+    }
+  }
+  &__checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+
+      left: 0.6rem;
+      top: 0.4rem;
+      width: 5px;
+      height: 10px;
+      border: solid $color-grey;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+  }
+}
+
+.search {
+  &__input {
+    font-size: 1rem;
+    padding: 0.5rem 1rem 0.5rem 1rem;
+    border: none;
+    border-bottom: 2.5px solid $color-grey;
+    border-radius: 10px 10px 0 0;
+    background-color: $color-yellow;
+    color: black;
+
+    &::placeholder {
+      opacity: 0.6;
+    }
+  }
+}
+
+.label__hidden {
+  visibility: hidden;
+}
+
+.side-menu {
+  &__block {
+    margin-bottom: 1rem;
+  }
+  &__block-title {
+    font-family: "Raleway", sans-serif;
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+}

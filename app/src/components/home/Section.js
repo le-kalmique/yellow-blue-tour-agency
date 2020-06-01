@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import "../../stylesheets/Section.css";
 
-function SectionTitle(props) {
+export function SectionTitle(props) {
   return (
     <h2 className="section__title">{props.text}</h2>
   )

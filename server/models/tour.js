@@ -15,6 +15,18 @@ const TourSchema = new Schema({
     place: {
         type: String,
         required: true
+    },
+    date: {
+        type: Date,
+        required: true
+    },
+    placesAll: {
+        type: Number,
+        required: true
+    },
+    placesLeft: {
+        type: Number,
+        required: true
     }
 });
 

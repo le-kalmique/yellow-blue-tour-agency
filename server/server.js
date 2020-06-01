@@ -53,20 +53,29 @@ router.get('/tours/carousel', (req, res) => {
       .catch(err => res.status(500).send("Error 500"))
 })
 
+router.get('/tours/cities', (req, res) => {
+  let name = "";
+  if (req.query.name) name = req.query.name;
+  Tour.getCities(name)
+    .then(cities => res.status(200).send(cities))
+    .catch(err => res.status(500).send(err));
+});
+
+
 router.get('/tours', (req,res)=> {
     let page = 0;
     if (req.query.page) page = parseInt(req.query.page) - 1;
     let toursPerPage = 5;
-    if (req.query.limit) toursPerPage = req.query.limit;
+    if (req.query.limit) toursPerPage = parseInt(req.query.limit);
     let searchQuery = "";
     if (req.query.search) searchQuery = req.query.search;
-    let city = "";
+    let city = [];
     if (req.query.city) city = req.query.city;
-    let minDate = new Date().toISOString();
-    if (req.query.minDate) minDate = new Date(req.query.minDate);
+    let minDate = new Date();
+    if (req.query.minDate && req.query.minDate.length !== 0) minDate = new Date(req.query.minDate);
     let maxDate = new Date();
     maxDate.setFullYear(minDate.getFullYear() + 1);
-    if (req.query.maxDate) maxDate = new Date(req.query.maxDate);
+    if (req.query.maxDate && req.query.maxDate !== "") maxDate = new Date(req.query.maxDate);
     if (page < 0) res.status(400).send('Bad request');
     else Tour.getPage(page, toursPerPage, searchQuery, city, minDate, maxDate)
         .then(tours => {
@@ -81,6 +90,7 @@ router.get('/tours', (req,res)=> {
             res.status(500).send(err);
         })
 })
+
 
 
 

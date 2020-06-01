@@ -3,8 +3,10 @@
 $color-white: rgb(255, 252, 242);
 $color-grey: rgb(54, 53, 55);
 $color-yellow: rgb(252, 243, 0);
+$color-yellow-code: 252, 243, 0;
 $color-blue: rgb(83, 76, 185);
 $color-lightgrey: rgb(204, 197, 185);
+
 
 @mixin border-shadow {
   -webkit-box-shadow: 0 0 15px -3px rgba(0,0,0,0.59);
