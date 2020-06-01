@@ -50,19 +50,31 @@ class CheckboxBlock extends Component {
     this.props.parentCallback(this.state.chosenCities);
   }
   onChange(event) {
-    let cities = this.state.chosenCities;
+    const cities = this.state.chosenCities;
+    const all = this.state.citiesAll;
+    console.log("ALL", all)
     if (event.target.checked) {
-     cities.push(event.target.value);
+      all[all.findIndex(city => city.city === event.target.value)].chosen = true;
+      cities.push(event.target.value);
     }
     else for(let i = 0; i < cities.length; i++) {
-        if (cities[i] === event.target.value) cities.splice(i, 1);
+      all[all.findIndex(city => city.city === event.target.value)].chosen = false;
+      if (cities[i] === event.target.value) cities.splice(i, 1);
     }
-    this.setState({chosenCities: cities}, this.sendToFilter);
+    // all[all.findIndex(city => city === event.target.value)].chosen = true;
+    this.setState({chosenCities: cities, citiesAll: all}, this.sendToFilter);
   }
   setCities(name) {
     fetch(`http://localhost:4000/api/tours/cities?name=${name}`)
       .then(res => res.json())
       .then(cities => {
+        let allInputs = [];
+        cities.forEach(city => {
+          allInputs.push({
+            city: city,
+            chosen: false
+          })
+        })
         let chosen = this.state.chosenCities;
         for (let i = 0; i < chosen.length; i++)
         {
@@ -70,8 +82,11 @@ class CheckboxBlock extends Component {
             chosen.splice(i, 1);
             i--;
           }
+          else {
+            allInputs[cities.findIndex((city) => city === chosen[i])].chosen = true;
+          }
         }
-        this.setState({citiesAll: cities, loading: false, chosenCities: chosen})
+        this.setState({citiesAll: allInputs, loading: false, chosenCities: chosen})
       })
       .catch(err => console.log(err));
   }
@@ -89,8 +104,8 @@ class CheckboxBlock extends Component {
     return (
       <div className="checkbox-block">
         {this.state.citiesAll.map((city, i) =>
-          <label className="checkbox-block__item"  key={i}>{city}
-            <input name={`city${i}`} className="checkbox-block__input" type="checkbox" onChange={this.onChange} value={city}/>
+          <label className="checkbox-block__item" key={i}>{city.city}
+            <input name={`city-${city.city}`} className="checkbox-block__input" checked={city.chosen} type="checkbox" onChange={this.onChange} value={city.city}/>
             <span className="checkbox-block__checkmark"/>
           </label>
         )}
