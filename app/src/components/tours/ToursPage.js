@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from "react-router-dom";
 
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMapMarkerAlt, faCalendarAlt, faClock, faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
+import {faMapMarkerAlt, faCalendarAlt, faClock} from "@fortawesome/free-solid-svg-icons";
 
 
 import Header from "../shared/Header";
@@ -52,7 +52,7 @@ class TourCard extends Component {
   render() {
     return (
       <div className="tour">
-        <img className="tour__image" src={this.props.tour.imgUrl} alt="image"/>
+        <img className="tour__image" src={this.props.tour.imgUrl} alt="tour"/>
         <div className="tour__content">
           <h3 className="tour__title">{this.props.tour.name}</h3>
           <div className="tour__info">

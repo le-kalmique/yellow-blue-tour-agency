@@ -8,10 +8,7 @@ export function SectionTitle(props) {
   )
 }
 
-export default class Section extends Component{
-  constructor(props) {
-    super(props);
-  }
+export default class Section extends Component {
   render() {
     let className = "section";
     if (this.props.background) className += " background_grey"

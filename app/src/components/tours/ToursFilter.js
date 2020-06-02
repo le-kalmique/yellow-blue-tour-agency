@@ -18,12 +18,17 @@ export class Pagination extends Component {
     this.props.parentCallback(this.state.chosenPage);
   }
   handleRightClick(event) {
-    if (this.state.chosenPage !== this.props.pagesNum)
-      this.setState({chosenPage: ++this.state.chosenPage}, this.sendPage)
+    if (this.state.chosenPage !== this.props.pagesNum) {
+      const nextPage = this.state.chosenPage + 1;
+      this.setState({chosenPage: nextPage}, this.sendPage);
+    }
   }
   handleLeftClick(event) {
     if (this.state.chosenPage !== 1)
-      this.setState({chosenPage: --this.state.chosenPage}, this.sendPage)
+    {
+      const prevPage = this.state.chosenPage - 1;
+      this.setState({chosenPage: prevPage}, this.sendPage);
+    }
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (prevProps.pagesNum !== this.props.pagesNum)
@@ -38,7 +43,7 @@ export class Pagination extends Component {
         <button className="pagination__arrow-btn" disabled={this.state.chosenPage === 1} onClick={this.handleLeftClick}>
           <FontAwesomeIcon icon={faAngleLeft}/>
         </button>
-        <span>{this.state.chosenPage}</span>/<span>{this.props.pagesNum != undefined ? this.props.pagesNum : '...'}</span>
+        <span>{this.state.chosenPage}</span>/<span>{this.props.pagesNum !== undefined ? this.props.pagesNum : '...'}</span>
         <button className="pagination__arrow-btn" disabled={this.state.chosenPage === this.props.pagesNum} onClick={this.handleRightClick}>
           <FontAwesomeIcon icon={faAngleRight}/>
         </button>

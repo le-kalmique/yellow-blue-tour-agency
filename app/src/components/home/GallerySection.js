@@ -8,7 +8,7 @@ import {
 function GalleryImage(props) {
   return (
     <div className="gallery__item">
-      <img className="gallery__image" src={props.src} alt="gallery image"/>
+      <img className="gallery__image" src={props.src} alt="gallery"/>
       <div className="gallery__text">{props.name}</div>
     </div>);
 }
@@ -26,7 +26,7 @@ export default class GallerySection extends React.Component {
     fetch("http://localhost:4000/api/tours/gallery")
       .then(res => res.json())
       .then(tours => {
-        if (tours.status == 500) throw new Error("505");
+        if (tours.status === 500) throw new Error("505");
         else {
           this.setState({
             loading: false,

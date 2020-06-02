@@ -4,30 +4,20 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 
 import '../../stylesheets/Carousel.css'
 
-class LeftArrow extends Component{
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return(
-      <div className='backArrow' onClick={this.props.goToPrevSlide}>
-        <FontAwesomeIcon icon={faAngleLeft} className='left-icon' size="3x"/>
-      </div>
-    )
-  }
+function LeftArrow(props) {
+  return(
+    <div className='backArrow' onClick={props.goToPrevSlide}>
+      <FontAwesomeIcon icon={faAngleLeft} className='left-icon' size="3x"/>
+    </div>
+  )
 }
 
-class RightArrow extends Component{
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return(
-      <div className='nextArrow' onClick={this.props.goToNextSlide}>
-        <FontAwesomeIcon icon={faAngleRight} className='right-icon' size="3x"/>
-      </div>
-    )
-  }
+function RightArrow(props){
+  return(
+    <div className='nextArrow' onClick={props.goToNextSlide}>
+      <FontAwesomeIcon icon={faAngleRight} className='right-icon' size="3x"/>
+    </div>
+  )
 }
 
 class Slide extends Component {
@@ -44,7 +34,7 @@ class Slide extends Component {
               index === this.props.activeIndex ? 'active' : 'inactive'}
                  key={index}>
               <p className='slide__title'>{s.name}</p>
-              <img className='slide__image' src={s.imgUrl} alt='tour image'/>
+              <img className='slide__image' src={s.imgUrl} alt='tour carousel'/>
             </div>
           ) }
       </section>
@@ -71,7 +61,7 @@ export default class Carousel extends Component {
     fetch('http://localhost:4000/api/tours/carousel')
       .then(response => response.json())
       .then(data => {
-        if (data.status == 500) console.log(data);
+        if (data.status === 500) console.log(data);
         else {
           console.log(data.tours)
           this.setState({

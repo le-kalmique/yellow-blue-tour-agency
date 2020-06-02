@@ -33,7 +33,7 @@ function Contacts() {
         </div>
       </div>
       <div className="contacts__map">
-        <iframe
+        <iframe title="Map"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2540.648376318622!2d30.45448841561582!3d50.44764987947497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d4ce9d7d09398d%3A0xa218cd21e7add3af!2z0JrQvtGA0L_Rg9GBIOKEljE1INCa0J_QhiDRltC8LtCG0LPQvtGA0Y8g0KHRltC60L7RgNGB0YzQutC-0LPQvg!5e0!3m2!1sen!2sua!4v1591051823113!5m2!1sen!2sua"
           width="700" height="400" frameBorder="0" style={{border:0}} allowFullScreen="" aria-hidden="false"
           tabIndex="0"/>

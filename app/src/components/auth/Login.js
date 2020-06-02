@@ -6,7 +6,7 @@ import Header from "../shared/Header";
 import "../../stylesheets/Form.css";
 import {faSignInAlt} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Redirect, useHistory} from "react-router";
+import {Redirect} from "react-router";
 
 
 class LoginForm extends React.Component {
