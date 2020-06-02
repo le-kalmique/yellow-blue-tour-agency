@@ -169,11 +169,10 @@
       z-index: 2;
 
       &:hover ~ .side-menu, &:active ~ .side-menu{
-        //visibility: visible;
-        //-webkit-transform: translate(-500px, 500px);
-        //-moz-transform: translate(500px, 0px);
-        //-ms-transform: translate(500px, 0px);
-        //-o-transform: translate(500px, 0px);
+        -webkit-transform: translate(-500px, 500px);
+        -moz-transform: translate(500px, 0px);
+        -ms-transform: translate(500px, 0px);
+        -o-transform: translate(500px, 0px);
         transform: translate(500px, 0);
       }
       @include border-shadow;
@@ -182,12 +181,9 @@
   .side-menu {
     transition: all ease 0.5s;
     transition-delay: 0.1s;
-    //visibility: hidden;
     left: -500px;
     background-color: white;
     &:hover, &:active {
-      //display: block;
-      //visibility: visible;
       left: 0;
       & ~ .filter__button {
         display: none;

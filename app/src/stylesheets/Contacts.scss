@@ -6,8 +6,48 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+
+  a {
+    color: black;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   &__map {
     overflow: hidden;
+    margin: 2rem;
+    z-index: 1;
+
+    @include border-shadow;
+  }
+  &__icons {
+    margin: 1rem;
+
+  }
+  &__icon {
+    font-size: 2rem;
+    margin: 0.3rem;
+    color: $color-blue;
+  }
+  &__personal-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  &:after {
+    content: '';
+    width: 60%;
+    height: 70%;
+    background: linear-gradient(to bottom right, #fff 0%, #fff 50%, $color-yellow 50%, $color-yellow 100%);
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
   }
 }
 
