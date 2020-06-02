@@ -82,6 +82,20 @@ router.post("/users/login", (req, res) => {
     })
 });
 
+router.get('/users/:id/order/:tourId', (req, res) => {
+  User.addTour(req.params.id, req.params.tourId)
+    .then(success => res.status(200).send(success))
+    .catch(err => res.status(500).send("Error 500"));
+})
+
+router.get('/users/:id', (req, res) => {
+  User.getById(req.params.id)
+    .then(user => {
+      res.status(200).send(user);
+    })
+    .catch(err => res.status(500).send("Error 500"))
+})
+
 router.get('/tours/gallery', (req,res) => {
   let gallerySize = 6;
   if (req.query.len) gallerySize = parseInt(req.query.len);

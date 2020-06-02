@@ -11,6 +11,14 @@ class User {
     this.email = email;
   }
 
+  static getById(id) {
+    return Users.findOne({_id: id});
+  }
+
+  static addTour(userid, tourid) {
+    return Users.findOneAndUpdate({_id: userid}, { $push: {tourIds: tourid}});
+  }
+
   static Register(email, login, password) {
     return new Promise((resolve, reject) => {
       Users.findOne({ email: email }).then(user => {
