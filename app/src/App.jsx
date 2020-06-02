@@ -11,6 +11,7 @@ import ToursPage from "./components/tours/ToursPage";
 import TourPage from "./components/tours/TourPage";
 import ContactsPage from "./components/contacts/Contacts";
 import LoginPage from "./components/auth/Login";
+import AccountPage from "./components/auth/Account";
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Route path="/tours"><ToursPage/></Route>
             <Route path="/contacts"><ContactsPage/></Route>
             <Route path="/login"><LoginPage/></Route>
+            <Route path="/account"><AccountPage/></Route>
           </Switch>
       </Router>
     );

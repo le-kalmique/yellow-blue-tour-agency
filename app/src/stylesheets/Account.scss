@@ -1,0 +1,63 @@
+@import "Shared";
+
+.account {
+  display: flex;
+  flex-direction: row;
+
+  &__title {
+    margin: 0 0 1rem;
+    font-family: Raleway, sans-serif;
+  }
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    @include border-shadow;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 1rem;
+  }
+  &__info {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: stretch;
+    margin: 1rem;
+  }
+  &__or {
+    align-self: center;
+    font-size: 2rem;
+    margin: 0.5rem;
+    color: $color-blue;
+  }
+  &__field {
+    &-name {
+      font-weight: bold;
+    }
+  }
+  &__btn {
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+    background-color: $color-yellow;
+    padding: 1rem;
+    font-size: 1.2rem;
+
+    @include border-shadow;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__paragraph {
+    margin: 0 0 0.5em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .account {
+    flex-direction: column;
+  }
+}

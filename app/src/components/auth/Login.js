@@ -1,5 +1,4 @@
 import React from "react";
-import jwt from 'jwt-decode'
 
 import Section from "../home/Section";
 import Header from "../shared/Header";
@@ -59,6 +58,13 @@ class LoginForm extends React.Component {
       })
       .catch(err => console.log(err));
   }
+  componentDidMount() {
+    if (typeof Storage !== "undefined") {
+      if (localStorage.getItem( 'jwt') !== null)
+        this.setState({loggedIn: true})
+    }
+  }
+
   render() {
     return (
       <div className="login">
