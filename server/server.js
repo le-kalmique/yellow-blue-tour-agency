@@ -57,6 +57,14 @@ router.post("/users/register", (req, res) => {
     .catch(err => console.log(err));
 });
 
+router.get("/users/:id/tours", (req, res) => {
+  User.getUserTours(req.params.id)
+    .then(user => {
+      res.status(200).send(user.tours)
+    })
+    .catch(err => res.status(500).send(err));
+})
+
 router.post("/users/login", (req, res) => {
   // Form validation
   const { errors, isValid } = validateLoginInput(req.body);
@@ -91,6 +99,7 @@ router.get('/users/:id/order/:tourId', (req, res) => {
 router.get('/users/:id', (req, res) => {
   User.getById(req.params.id)
     .then(user => {
+      console.log(user)
       res.status(200).send(user);
     })
     .catch(err => res.status(500).send("Error 500"))

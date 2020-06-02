@@ -117,7 +117,6 @@ $logo-height: 3rem;
       }
     }
 
-    /* Animation for submenu children */
     @for $n from 1 through 3 {
       &:nth-child(#{$n}) {
         animation-duration: 0.2s + 0.1s * ($n - 1);

@@ -16,7 +16,7 @@ function Account(props) {
           <span className="account__field-name">Email: </span><span>{props.user.email}</span>
         </div>
         <div className="account__field">
-          <span className="account__field-name">Tours: </span>{props.user.tourIds && <span>{props.user.tourIds.length}</span>}
+          <span className="account__field-name">Tours: </span>{props.user.tours && <span>{props.user.tours.length}</span>}
         </div>
       </div>
       <div className="account__info">

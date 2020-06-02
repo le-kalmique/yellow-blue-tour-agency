@@ -22,6 +22,8 @@
   }
 
   &__label {
+    display: flex;
+    justify-content: space-between;
     color: $color-blue;
     font-weight: bold;
     text-transform: uppercase;
@@ -31,6 +33,7 @@
     font-size: 3rem;
     color: $color-blue;
     align-self: center;
+    margin: 1rem;
   }
 
   &__button {
@@ -44,9 +47,16 @@
     padding: 0.5rem;
     border-radius: 5px;
   }
+
+  &__error {
+    color: $color-grey;
+    text-transform: none;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+  }
 }
 
-.login {
+.login, .register {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -78,11 +88,14 @@
 }
 
 @media screen and (max-width: 600px) {
-  .login {
+  .login, .register {
     flex-direction: column;
     &__image-block {
       width: 100%;
       height: 35vh;
     }
+  }
+  .register {
+    flex-direction: revert;
   }
 }

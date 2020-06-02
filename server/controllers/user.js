@@ -1,4 +1,7 @@
+const Tours = require('../models/tour');
 const Users = require('../models/user');
+
+const mongoose = require('mongoose');
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -15,8 +18,20 @@ class User {
     return Users.findOne({_id: id});
   }
 
+  static getUserTours(userId) {
+    console.log(userId)
+    return Users.findById(userId).populate({path: 'tours', model: Tours}).exec();
+  }
+
   static addTour(userid, tourid) {
-    return Users.findOneAndUpdate({_id: userid}, { $push: {tourIds: tourid}});
+    return new Promise((resolve, reject) => {
+      Users.findOneAndUpdate({_id: userid}, {$push: {tours: tourid}})
+        .then(updated => {
+          return Tours.findOneAndUpdate({_id: tourid}, {$inc: {'placesLeft': -1}})
+        })
+        .then(updated => resolve(true))
+        .catch(err => reject(err));
+    });
   }
 
   static Register(email, login, password) {

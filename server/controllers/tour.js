@@ -58,7 +58,6 @@ class Tour {
     }
 
     static getCities(name) {
-        console.log(name)
         return Tours.find({name: {$regex: name, $options: "i"}}).sort('name').distinct('city');
     }
 }

@@ -1,24 +1,63 @@
 import React, { Component } from 'react';
+import jwt from 'jwt-decode';
 
 import "../../stylesheets/Tour.css"
 import Page404 from "../shared/Page404";
 import Header from "../shared/Header";
 import Section from "../home/Section";
 import {TimePlace} from "./ToursPage";
+class Tour extends Component{
+  constructor(props) {
+    super(props);
+    this.state = {
+      loggedIn: false,
+      ordered: false
+    }
+    this.handleClick = this.handleClick.bind(this);
+  }
+  handleClick(event) {
+    if (window.confirm("Are you sure about this order?"))
+    {
+      fetch(`http://localhost:4000/api/users/${jwt(localStorage.getItem('jwt')).id}/order/${this.props.tour._id}`)
+        .then(res => {
+          if (res.status === 500) throw new Error("Error 500")
+          else this.setState({ordered: true})
+        })
+    }
+  }
+  componentDidMount() {
+    if (typeof Storage !== "undefined" && localStorage.getItem("jwt") !== null)
+    {
+      this.setState({loggedIn: true})
+      fetch(`http://localhost:4000/api/users/${jwt(localStorage.getItem("jwt")).id}`)
+        .then(res => {
+          if (res.status === 500) throw new Error("Error 500")
+          else return res.json();
+        })
+        .then(user => {
+          console.log(user);
+          if (user.tours.includes(this.props.tour._id)) this.setState({ordered: true});
+        })
+        .catch(err => console.log(err));
+    }
+  }
 
-function Tour(props) {
-  return (
-    <div className="tour-body">
-      <img className="tour-body__image" alt="tour" src={props.tour.imgUrl}/>
-      <div className="tour-body__content">
-        <div className="tour-body__info">
-          <TimePlace city={props.tour.city} date={props.tour.date} className="tour-body"/>
-          <p className="tour-body__description">{props.tour.description}</p>
+  render() {
+    return (
+      <div className="tour-body">
+        <img className="tour-body__image" alt="tour" src={this.props.tour.imgUrl}/>
+        <div className="tour-body__content">
+          <div className="tour-body__info">
+            <TimePlace city={this.props.tour.city} date={this.props.tour.date} className="tour-body"/>
+            <p className="tour-body__description">{this.props.tour.description}</p>
+          </div>
+          <span className="tour-body__places">Only <span className="tour-body__places-n">{this.props.tour.placesLeft}</span> places left!</span>
+          {(this.state.loggedIn && !this.state.ordered) && <button className="tour-body__btn" onClick={this.handleClick}>Order Now!</button>}
+          {this.state.ordered && 'Ordered!'}
         </div>
-        <span className="tour-body__places">Only <span className="tour-body__places-n">{props.tour.placesLeft}</span> places left!</span>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default class TourPage extends Component{

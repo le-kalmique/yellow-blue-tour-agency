@@ -92,19 +92,13 @@ class LoginForm extends React.Component {
   }
 }
 
-export default class LoginPage extends React.Component {
-  constructor() {
-    super();
-  }
-
-  render() {
-    return (
+export default function LoginPage() {
+   return (
       <div className="wrapper">
         <Header/>
         <div className="content">
           <Section title="Login" section={<LoginForm/>}/>
         </div>
       </div>
-    )
-  }
+   );
 }
