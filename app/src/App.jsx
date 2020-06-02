@@ -10,6 +10,7 @@ import Home from "./components/home/Home";
 import ToursPage from "./components/tours/ToursPage";
 import TourPage from "./components/tours/TourPage";
 import ContactsPage from "./components/contacts/Contacts";
+import LoginPage from "./components/auth/Login";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route path='/tours/:id' component={TourPage}/>
             <Route path="/tours"><ToursPage/></Route>
             <Route path="/contacts"><ContactsPage/></Route>
+            <Route path="/login"><LoginPage/></Route>
           </Switch>
       </Router>
     );

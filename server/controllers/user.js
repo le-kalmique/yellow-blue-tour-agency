@@ -51,19 +51,16 @@ class User {
             // Create JWT Payload
             const payload = {
               id: user.id,
-              name: user.name
+              name: user.login
             };
             // Sign token
             jwt.sign(
               payload,
-              keys.secretOrKey,
-              {
-                expiresIn: 31556926 // 1 year in seconds
-              },
+              "secret",
               (err, token) => {
                 resolve({
                   success: true,
-                  token: "Bearer " + token
+                  token: token
                 });
               }
             );
