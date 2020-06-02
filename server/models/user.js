@@ -8,8 +8,18 @@ const UserSchema = new Schema({
   },
   password: {
     type: String,
-    required: false
-  }
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  tourIds: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'tours'
+    }
+  ]
 });
 
-module.exports = mongoose.model("Tour", TourSchema);
+module.exports = mongoose.model("User", UserSchema);

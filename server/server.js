@@ -4,6 +4,17 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const keys = require("../config/keys");
+
+const passport = require("passport");
+
+const validateRegisterInput = require("../validation/register");
+const validateLoginInput = require("../validation/login");
+
+
+const User = require("./controllers/user");
 
 const Tour = require('./controllers/tour');
 
@@ -11,6 +22,8 @@ const API_PORT = 4000;
 
 const app = express();
 app.use(cors());
+app.use(passport.initialize());
+require("../config/passport")(passport);
 const router = express.Router();
 
 const dbRoute =
@@ -28,6 +41,46 @@ app.use(bodyParser.json());
 app.use(logger('dev'));
 
 app.use('/api', router);
+
+router.post("/users/register", (req, res) => {
+  // Form validation
+  const { errors, isValid } = validateRegisterInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  User.Register(req.body.email, req.body.login, req.body.password)
+    .then(user => {
+      if (user === null) res.status(400).send({ email: "Email already exists" });
+      else res.status(200).send({user});
+    })
+    .catch(err => console.log(err));
+});
+
+router.post("/users/login", (req, res) => {
+  // Form validation
+  const { errors, isValid } = validateLoginInput(req.body);
+  // Check validation
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  const email = req.body.email;
+  const password = req.body.password;// Find user by email
+  User.Login(email, password)
+    .then(user => {
+      if (!user.success) {
+        if (user.exists !== undefined) {
+          res.status(404).send("Email not found");
+        }
+        else if (!user.password) {
+          res.status(400).send("Wrong password");
+        }
+      }
+      else {
+        res.status(200).send({user: user});
+      }
+    })
+});
 
 router.get('/tours/gallery', (req,res) => {
   let gallerySize = 6;

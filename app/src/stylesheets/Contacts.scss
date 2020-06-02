@@ -43,11 +43,27 @@
     content: '';
     width: 60%;
     height: 70%;
+    z-index: 0;
     background: linear-gradient(to bottom right, #fff 0%, #fff 50%, $color-yellow 50%, $color-yellow 100%);
 
     position: absolute;
     bottom: 0;
     right: 0;
+  }
+}
+
+@media screen and (max-width: 700px){
+  .contacts {
+    z-index: 1;
+    flex-direction: column;
+
+    &:after {
+      content: none;
+    }
+
+    &__map {
+      width: 100%;
+    }
   }
 }
 
