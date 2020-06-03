@@ -16,11 +16,11 @@ class Tour {
     }
 
     static getAll() {
-        return Tours.find({});
+        return Tours.find({date: {$gte: new Date().toISOString()}});
     }
 
     static getSome(number) {
-        return Tours.find({}).limit(number);
+        return Tours.find({date: {$gte: new Date().toISOString()}}).limit(number);
     }
 
     static getPage(pageNum, perPage, searchQuery, city, minDate, maxDate) {
@@ -36,6 +36,9 @@ class Tour {
                 date: {
                     $gte: minDate,
                     $lte: maxDate
+                },
+                placesLeft: {
+                    $gt: 0
                 }
             }
             if (city.length === 0) filter.city = { $regex: ""};
