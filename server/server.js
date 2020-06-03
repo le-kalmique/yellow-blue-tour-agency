@@ -4,10 +4,6 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const keys = require("../config/keys");
-
 const passport = require("passport");
 
 const validateRegisterInput = require("../validation/register");

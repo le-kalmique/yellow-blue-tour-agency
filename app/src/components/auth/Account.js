@@ -31,8 +31,8 @@ function Account(props) {
 }
 
 export default class AccountPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       loading: false,
       user: {},

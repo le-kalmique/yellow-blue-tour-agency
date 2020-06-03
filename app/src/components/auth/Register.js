@@ -8,8 +8,8 @@ import Section from "../home/Section";
 import "../../stylesheets/Form.css";
 
 class Register extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       login: "",
       email: "",

@@ -23,11 +23,12 @@ class User {
     return Users.findById(userId).populate({path: 'tours', model: Tours}).exec();
   }
 
-  static addTour(userid, tourid) {
+  // noinspection SpellCheckingInspection
+  static addTour(userId, tourId) {
     return new Promise((resolve, reject) => {
-      Users.findOneAndUpdate({_id: userid}, {$push: {tours: tourid}})
+      Users.findOneAndUpdate({_id: userId}, {$push: {tours: tourId}})
         .then(updated => {
-          return Tours.findOneAndUpdate({_id: tourid}, {$inc: {'placesLeft': -1}})
+          return Tours.findOneAndUpdate({_id: tourId}, {$inc: {'placesLeft': -1}})
         })
         .then(updated => resolve(true))
         .catch(err => reject(err));
