@@ -59,16 +59,15 @@ export default class Carousel extends Component {
   componentDidMount() {
     this.setState({loading: true});
     fetch('http://localhost:4000/api/tours/carousel')
-      .then(response => response.json())
+      .then(response => {
+        if (response.status === 500) throw new Error("Error 500");
+        return response.json();
+      })
       .then(data => {
-        if (data.status === 500) console.log(data);
-        else {
-          console.log(data.tours)
-          this.setState({
-            loading: false,
-            array: data.tours
-          })
-        }
+        this.setState({
+          loading: false,
+          array: data.tours
+        })
       })
       .catch(err => console.log(err))
   }

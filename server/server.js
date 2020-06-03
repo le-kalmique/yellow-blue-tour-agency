@@ -95,7 +95,6 @@ router.get('/users/:id/order/:tourId', (req, res) => {
 router.get('/users/:id', (req, res) => {
   User.getById(req.params.id)
     .then(user => {
-      console.log(user)
       res.status(200).send(user);
     })
     .catch(err => res.status(500).send("Error 500"))

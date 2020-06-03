@@ -35,7 +35,6 @@ class Tour extends Component{
           else return res.json();
         })
         .then(user => {
-          console.log(user);
           if (user.tours.includes(this.props.tour._id)) this.setState({ordered: true});
         })
         .catch(err => console.log(err));
@@ -85,7 +84,6 @@ export default class TourPage extends Component{
       .catch(err => console.log(err));
   }
   render() {
-    console.log(this.state)
     return (
       <div className="container">
         <Header/>

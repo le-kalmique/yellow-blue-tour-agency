@@ -19,11 +19,9 @@ class User {
   }
 
   static getUserTours(userId) {
-    console.log(userId)
     return Users.findById(userId).populate({path: 'tours', model: Tours}).exec();
   }
 
-  // noinspection SpellCheckingInspection
   static addTour(userId, tourId) {
     return new Promise((resolve, reject) => {
       Users.findOneAndUpdate({_id: userId}, {$push: {tours: tourId}})

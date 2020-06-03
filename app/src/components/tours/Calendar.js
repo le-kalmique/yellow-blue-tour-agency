@@ -29,7 +29,6 @@ export default class Calendar extends React.Component {
             return res.json();
           })
           .then(tours => {
-            console.log(tours)
             const events = [];
             tours.forEach(tour => {
               events.push({title: tour.name, start: tour.date, url: `/tours/${tour._id}`});

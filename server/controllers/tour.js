@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const Tours = require('../models/tour');
 
 class Tour {
@@ -26,7 +25,6 @@ class Tour {
 
     static getPage(pageNum, perPage, searchQuery, city, minDate, maxDate) {
         return new Promise((resolve, reject) => {
-            console.log(city)
             let filter = {
                 name: {
                     $regex: searchQuery,
