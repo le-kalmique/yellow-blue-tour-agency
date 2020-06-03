@@ -36,7 +36,7 @@ export default function Footer() {
       </div>
       <div className="footer__links">
         <p className="footer__about">
-          <h4 className="footer__about-title">About Us</h4>
+          <span className="footer__about-title">About Us</span>
           This is a dummy website of a tour agency created as a student project.
         </p>
         <div className="footer__icons">

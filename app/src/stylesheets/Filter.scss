@@ -204,8 +204,10 @@
 @media screen and (max-width: 600px) {
   .pagination {
     top: 30vh;
+    border-radius: 0 5px 5px 0;
   }
   .filter__button {
     top: 35vh;
+    border-radius: 0 5px 5px 0;
   }
 }

@@ -67,9 +67,14 @@
     width: 20%;
     color: $color-white;
   }
+  &__about {
+    display: flex;
+    flex-direction: column;
+  }
   &__about-title {
     font-family: 'Raleway', sans-serif;
     margin: 0.4rem;
+    font-weight: bold;
   }
   &__icons {
     display: flex;
